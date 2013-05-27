@@ -5,7 +5,7 @@ class Matchup:
         self.best_of = best_of
         self.tags_array = tags
         self.__end_time = None
-        self.__teams = []
+        self.__players = []
         self.__scoreboard = {}
         self.__games = []
         self.winner = None
@@ -14,25 +14,46 @@ class Matchup:
         self.__games.sort(key=lambda game: game.unix_start_time())
 
     def has_winner(self):
-        pass
+        for player_name in self.__scoreboard:
+            player = self.get_player(player_name)
+            player['score'] = self.__scoreboard[player_name]
+            if player['score'] > self.best_of / 2:
+                self.winner = player
 
-    def set_games(self, game_list):
+
+    def set_games(self, game_list, match_meta={}):
         self.__games = game_list
 
         for game in self.__games:
             game_winner = game.get_winner()
-            # if(game_winner):
-            #     self.__scoreboard[game_winner['name']] += 1
-        #
+            for player in game.get_players():
+                self.add_player(player)
+                if not player['name'] in self.__scoreboard:
+                    self.__scoreboard[player['name']] = 0
+            if game_winner:
+                self.__scoreboard[game_winner['name']] += 1
+
         for i in range(len(self.__games), self.best_of):
             self.__games.append( Game() )
-        # print("scoreboard: {0}".format(self.__scoreboard))
+
+        if 'aliases' in match_meta:
+            self.apply_aliases(match_meta['match_meta'])
         self.has_winner()
 
-    def set_teams():
-        pass
+    def add_player(self, new_player):
+        for player in self.__players:
+            if player['name'] == new_player['name']:
+                return None
+        self.__players.append(new_player)
 
-    def use_aliases(self):
+
+    def get_player(self, name):
+        for player in self.__players:
+            if(player['name'] is name):
+                return player
+        return None
+
+    def apply_aliases(self):
         pass
 
     def number_games(self):
@@ -46,7 +67,7 @@ class Matchup:
             "best_of": self.best_of,
             "winner": self.winner,
             "end_time": self.__end_time,
-            "teams": self.__teams
+            "teams": self.__players
         }
 
 class Game:
@@ -56,7 +77,7 @@ class Game:
         self.__ends_at = None
         self.__winner = None
         self.status = "ready"
-        self.players = []
+        self.__players = []
         self.vod_url = None
         self.map = None
 
@@ -64,6 +85,15 @@ class Game:
         self.__starts_at = time_start
         self.__ends_at = time_end
         return self
+
+    def add_player(self, name, race):
+        self.__players.append({
+            "name": name,
+            "race": race
+        })
+
+    def get_players(self):
+        return self.__players
 
     def get_winner(self):
         return self.__winner

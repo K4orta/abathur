@@ -17,8 +17,8 @@ def parse_matchup(directory, tags, meta_options):
     match.set_games(games)
     match.sortGames()
     match.number_games()
-    print(match.to_object())
-    print("==============")
+    # print(match.to_object())
+    # print("==============")
     return match
 
 def parse_game(replay):

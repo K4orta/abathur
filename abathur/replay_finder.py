@@ -5,10 +5,11 @@ def rec_dir(dir, tags=()):
     regex = re.compile("(.SC2Replay$)|(.yaml$)", re.I)
     replays_here = False
     meta_options = {}
+    matches = ()
     for a in objects:
         cd = os.path.join(dir, a)
         if(os.path.isdir(cd)):
-            rec_dir(cd, tags + (a,))
+            matches += rec_dir(cd, tags + (a,))
         else:
             if(regex.search(a)):
                 if(a == "meta.yaml"):
@@ -17,4 +18,5 @@ def rec_dir(dir, tags=()):
                 replays_here = True
 
     if(replays_here):
-        replay_parser.parse_matchup(dir, tags, meta_options)
+        matches += (replay_parser.parse_matchup(dir, tags, meta_options),)
+    return matches
