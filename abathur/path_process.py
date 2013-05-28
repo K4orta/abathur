@@ -1,5 +1,7 @@
 import os, re, replay_parser, yaml
 
+root_dir = "/"
+
 def matchup_finder(directories):
     print("processing {0} directories".format(len(directories)))
     matches = []
@@ -13,11 +15,16 @@ def matchup_finder(directories):
     return matches
 
 def tags_from_path(path):
-    return []
+    # rd = re.compile(root_dir)
+    regex = re.compile("^set[\d]", re.I)
+    tags = re.sub( root_dir+"/", '', path ).split("/")
+    if len(tags) > 0 and regex.search(tags[len(tags)-1]):
+        tags = tags[:len(tags)-1]
+    return tags
 
 # returns None or the meta object if there is one
 def replays_in_dir(dir):
-    regex = re.compile("(.SC2Replay$)|(.yaml$)", re.I)
+    regex = re.compile("(.SC2Replay$)", re.I)
     yx = re.compile(".yaml$", re.I)
     objects = os.listdir(dir)
     meta_options = {}

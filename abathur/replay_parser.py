@@ -5,16 +5,10 @@ def parse_matchup(directory, tags, meta_options):
     best_of = meta_options['best_of'] if 'best_of' in meta_options else 3
     games = []
     match = resources.Matchup(list(tags), best_of)
-    count = 0
     for replay in replays:
         games.append(parse_game(replay))
-        count += 1
 
-    match.set_games(games)
-    match.sortGames()
-    match.number_games()
-    # print(match.to_object())
-    # print("==============")
+    match.set_games(games, meta_options)
     return match
 
 def parse_game(replay):

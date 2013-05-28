@@ -9,8 +9,9 @@ class Matchup:
         self.__scoreboard = {}
         self.__games = []
         self.winner = None
+        self.__aliases = {}
 
-    def sortGames(self):
+    def sort_games(self):
         self.__games.sort(key=lambda game: game.unix_start_time())
 
     def has_winner(self):
@@ -21,7 +22,7 @@ class Matchup:
                 self.winner = player
 
 
-    def set_games(self, game_list, match_meta={}):
+    def set_games(self, game_list, match_meta):
         self.__games = game_list
 
         for game in self.__games:
@@ -37,8 +38,19 @@ class Matchup:
             self.__games.append( Game() )
 
         if 'aliases' in match_meta:
-            self.apply_aliases(match_meta['match_meta'])
+            self.apply_aliases(match_meta['aliases'])
+        self.sort_games()
+        self.number_games()
         self.has_winner()
+
+        if len(self.__games) > 0 and len(self.__games[0].get_players()) <1:
+            for i in range(2):
+                tbd_player = {'name': "TBD {0}".format(i+1)}
+                print(match_meta)
+                if 'players' in match_meta and match_meta['players'][i] != None:
+                    tbd_player['name'] = match_meta['players'][i]['name']
+                    tbd_player['race'] = match_meta['players'][i]['race']
+                self.add_player(tbd_player)
 
     def add_player(self, new_player):
         for player in self.__players:
@@ -53,8 +65,12 @@ class Matchup:
                 return player
         return None
 
-    def apply_aliases(self):
-        pass
+    def get_players(self):
+        return [{'name': self.__aliases[player['name']] if player['name'] in self.__aliases else player['name'] , 'race': player['race']} for player in self.__players]
+
+
+    def apply_aliases(self, aliases):
+        self.__aliases = aliases
 
     def number_games(self):
         for i in range(len(self.__games)):
@@ -67,7 +83,7 @@ class Matchup:
             "best_of": self.best_of,
             "winner": self.winner,
             "end_time": self.__end_time,
-            "teams": self.__players
+            "teams": self.get_players()
         }
 
 class Game:
