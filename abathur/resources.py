@@ -68,6 +68,14 @@ class Matchup:
     def get_players(self):
         return [{'name': self.__aliases[player['name']] if player['name'] in self.__aliases else player['name'] , 'race': player['race']} for player in self.__players]
 
+    def get_winner(self):
+        if self.winner != None:
+            return {
+                'name': self.__aliases[self.winner['name']] if self.winner['name'] in self.__aliases else self.winner['name'] ,
+                'race': self.winner['race']
+            }
+        return None
+
 
     def apply_aliases(self, aliases):
         self.__aliases = aliases
@@ -79,9 +87,9 @@ class Matchup:
     def to_object(self):
         return {
             "tags_array": self.tags_array,
-            "games": [game.to_object() for game in self.__games],
+            "games": [game.to_object(self.__aliases) for game in self.__games],
             "best_of": self.best_of,
-            "winner": self.winner,
+            "winner": self.get_winner(),
             "end_time": self.__end_time,
             "teams": self.get_players()
         }
@@ -124,14 +132,17 @@ class Game:
     def unix_start_time(self):
         return calendar.timegm(self.__starts_at.utctimetuple()) if self.__starts_at != None else sys.maxint
 
-    def to_object(self):
+    def to_object(self, aliases):
+        winner = self.get_winner()
+        if winner!= None and aliases != None:
+            winner['name'] = aliases[winner['name']] if winner['name'] in aliases else winner['name']
         return {
             "number": self.number,
             "starts_at": self.__ends_at.isoformat() if self.__ends_at != None else None,
             "ends_at": self.__ends_at.isoformat() if self.__ends_at != None else None,
             "map": self.map,
             "status": self.status,
-            "winner": self.__winner
+            "winner": winner
         }
 
 class Participant:
