@@ -1,0 +1,1 @@
+from remote_fetch import fetch, fetch_dictionary

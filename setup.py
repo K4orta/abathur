@@ -9,7 +9,7 @@ config = {
     'url': 'http://github.com/k4orta/abathur',
     'author_email': 'ewong@blizzard.com',
     'version': '0.1',
-    'install_requires': ['sc2reader', 'pyyaml'],
+    'install_requires': ['sc2reader', 'pyyaml', 'watchdog'],
     'packages': ['abathur'],
     'scrips': [],
     'name': 'Abathur Replay Parser'

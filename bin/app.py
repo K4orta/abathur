@@ -1,9 +1,13 @@
-import sys, abathur, pprint
+import sys, os.path, pprint
 from watchdog.observers import Observer
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+import  abathur
 from abathur.fs_events import SequenceScheduler
 
-def watch(path):
+import viperteams
 
+def watch(path):
     event_handler = SequenceScheduler(abathur.matchup_finder, echo_matches)
     observer = Observer()
     observer.schedule(event_handler, path, recursive=True)

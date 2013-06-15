@@ -1,0 +1,99 @@
+[
+    {
+        "id": "51803e2c5f23eaddb300006e",
+        "slug": "moonglade",
+        "name": "mOOnGLaDe",
+        "image_url": "",
+        "race": "Zerg",
+        "full_name": "Andrew Pender",
+        "country": "Australia"
+    },
+    {
+        "id": "51803e215f23eaddb300006d",
+        "slug": "goswser",
+        "name": "Goswser",
+        "image_url": "",
+        "race": "Zerg",
+        "full_name": "Michael Dobler",
+        "country": "United States"
+    },
+    {
+        "id": "51803db65f23eaddb300006c",
+        "slug": "soo",
+        "name": "soO",
+        "image_url": "",
+        "race": "Zerg",
+        "full_name": "Yoon Su Eo",
+        "full_name_ko": "ì–´ìœ¤ìˆ˜",
+        "country": "South Korea"
+    },
+    {
+        "id": "51803da95f23eaddb300006b",
+        "slug": "crazy",
+        "name": "Crazy",
+        "image_url": "",
+        "race": "Zerg",
+        "full_name": "Jung Hyun Lim",
+        "full_name_ko": "ìž„ì •í˜„",
+        "country": "South Korea"
+    },
+    {
+        "id": "51803da05f23eaddb300006a",
+        "slug": "bboongbboong",
+        "name": "BBoongBBoong",
+        "image_url": "",
+        "race": "Zerg",
+        "full_name": "Jong Hyuk Choi",
+        "full_name_ko": "ìµœì¢…í˜",
+        "country": "South Korea"
+    },
+    {
+        "id": "51803d975f23eaddb3000069",
+        "slug": "shine",
+        "name": "Shine",
+        "image_url": "",
+        "race": "Zerg",
+        "full_name": "Young Han Lee",
+        "country": "South Korea"
+    },
+    {
+        "id": "51803d8f5f23eaddb3000068",
+        "slug": "true",
+        "name": "TRUE",
+        "image_url": "",
+        "race": "Zerg",
+        "full_name": "Tae Su Bang",
+        "full_name_ko": "ë°©íƒœìˆ˜",
+        "country": "South Korea"
+    },
+    {
+        "id": "51803d895f23eaddb3000067",
+        "slug": "life",
+        "name": "Life",
+        "image_url": "",
+        "race": "Zerg",
+        "full_name": "Seung Hyun Lee",
+        "full_name_ko": "ì´ìŠ¹í˜„",
+        "country": "South Korea"
+    },
+    {
+        "id": "51803d815f23eaddb3000066",
+        "slug": "kangho",
+        "name": "KangHo",
+        "image_url": "",
+        "race": "Zerg",
+        "full_name": "Kang Ho Hwang",
+        "full_name_ko": "í™©ê°•í˜¸",
+        "country": "South Korea"
+    },
+    {
+        "id": "51803d775f23eaddb3000065",
+        "slug": "hyun",
+        "name": "HyuN",
+        "image_url": "",
+        "race": "Zerg",
+        "full_name": "Seok Hyun Ko",
+        "full_name_ko": "ê³ ì„í˜„",
+        "country": "South Korea"
+    }
+]
